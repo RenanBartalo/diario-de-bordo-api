@@ -11,9 +11,7 @@ dotenv.config();
 initDbConnection();
 
 app.use(express.json());
-app.use(cors({
-  origin: process.env.FRONT_END_URI,
-})); // Liberando acesso SOMENTE para o localhost:3000!!!
+app.use(cors()); // Liberando acesso SOMENTE para o localhost:3000!!!
 
 app.use((req, res, next) => {
   console.log(req.method, ' ', req.path);
