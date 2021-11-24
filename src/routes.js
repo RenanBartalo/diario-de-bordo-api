@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import projectsController from './controllers/projectsController';
 import tasksController from './controllers/tasksController';
 import authController from './controllers/authController';
+import travelsController from './controllers/travelsController';
+import daysController from './controllers/daysController';
 
 import NotAuthenticatedException from './exceptions/NotAuthenticatedException';
 
@@ -38,5 +40,6 @@ router.use((req, res, next) => {
 // Rotas Privadas
 router.use('/projects', projectsController); // /api/projects
 router.use('/tasks', tasksController); // /api/tasks
-
+router.use('/travels', travelsController);
+router.use('/days', daysController);
 export default router;
