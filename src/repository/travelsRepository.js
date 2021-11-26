@@ -35,6 +35,10 @@ class TravelsRepository {
   async insertDayId(travelId, dayId) {
     await this.travelModel.findByIdAndUpdate(travelId, { $push: { days: dayId } });
   }
+
+  async update(travelId, body) {
+    await this.travelModel.findByIdAndUpdate(travelId, { $set: body });
+  }
 }
 
 export default TravelsRepository;

@@ -9,7 +9,7 @@ class DaysRepository {
     return days;
   }
 
-  async createNewTask(newDay) {
+  async createNewDay(newDay) {
     const savedDay = await this.dayModel.create(newDay);
 
     return savedDay;

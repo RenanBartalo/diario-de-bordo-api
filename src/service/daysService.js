@@ -25,7 +25,7 @@ class DaysService {
 
   async create(body, travelId) {
     const schema = yup.object().shape({
-      title: yup.string().required('Required Field').min(6, 'Minimum of 6 characters').max(50, 'Maximum of 50 characters'),
+      dia: yup.string().required('Required Field').min(1, 'Minimum of 1 characters').max(3, 'Maximum of 3 characters'),
       description: yup.string().required('Required Field').min(15, 'Minimum of 15 characters').max(150, 'Maximum of 150 characters'),
     });
 

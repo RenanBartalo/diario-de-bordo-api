@@ -53,4 +53,17 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.put('/', async (req, res, next) => {
+  try {
+    const { body } = req;
+    const { travelId } = req.params;
+
+    const updateTravel = await travelsService.update(travelId, body);
+
+    res.json(updateTravel);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;

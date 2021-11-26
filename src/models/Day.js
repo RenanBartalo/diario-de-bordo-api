@@ -2,12 +2,12 @@ import { Schema, model } from 'mongoose';
 
 const daySchema = new Schema({
   dia: {
-    type: String,
+    type: Number,
   },
   description: {
     type: String, required: true, minlength: 3, maxlength: 250,
   },
-  phtos: [{
+  photos: [{
     type: String,
   }],
   travel: { type: Schema.Types.ObjectId, ref: 'travel', required: true }, // One To One
