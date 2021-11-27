@@ -6,8 +6,8 @@ import InvalidBodyRequestException from '../exceptions/InvalidBodyRequestExcepti
 import InvalidIdException from '../exceptions/InvalidIdException';
 
 class DaysService {
-  constructor(dayRepository, travelRepository) {
-    this.dayRepository = dayRepository;
+  constructor(daysRepository, travelRepository) {
+    this.daysRepository = daysRepository;
     this.travelRepository = travelRepository;
   }
 
@@ -18,9 +18,15 @@ class DaysService {
       throw new InvalidIdException();
     }
 
-    const days = await this.dayRepository.getDaysByTravelId(travelId);
+    const days = await this.daysRepository.getDaysByTravelId(travelId);
 
     return days;
+  }
+
+  async getOneDay(dayId) {
+    const day = await this.daysRepository.getOneDay(dayId);
+
+    return day;
   }
 
   async create(body, travelId) {
@@ -48,11 +54,21 @@ class DaysService {
 
     const savedDay = await this.dayRepository.createNewDay({ ...body, travel: travelId });
 
-    // Aqui em baixo temos acesso ao _id da nova task
-    // Precisa pegar o projeto pelo ID e inserir dentro de tasks o ID da tarefa criada acima
     await this.travelRepository.insertDayId(travelId, savedDay._id);
 
     return savedDay;
+  }
+
+  async update(body, travelId) {
+    const updateDay = await this.daysRepository.update(body, travelId);
+
+    return updateDay;
+  }
+
+  async delete(travelId) {
+    const deleteDay = await this.daysRepository.delete(travelId);
+
+    return deleteDay;
   }
 }
 

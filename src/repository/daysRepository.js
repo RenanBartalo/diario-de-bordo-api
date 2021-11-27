@@ -9,10 +9,27 @@ class DaysRepository {
     return days;
   }
 
+  async getOneDay(dayId) {
+    const day = await this.dayModel.findById(dayId);
+    console.log(day);
+    return day;
+  }
+
   async createNewDay(newDay) {
     const savedDay = await this.dayModel.create(newDay);
 
     return savedDay;
+  }
+
+  async update(body, travelId) {
+    console.log('repository update', body);
+    const updateDay = await this.dayModel.findByIdAndUpdate(travelId, body, { new: true });
+    return updateDay;
+  }
+
+  async delete(travelId) {
+    const deleteDay = await this.dayModel.findById(travelId);
+    return deleteDay;
   }
 }
 

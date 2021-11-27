@@ -58,6 +58,12 @@ class TravelsService {
 
     return updateTravel;
   }
+
+  async delete(travelId) {
+    const deleteTravel = await this.travelsRepository.delete(travelId);
+
+    return deleteTravel;
+  }
 }
 
 export default TravelsService;

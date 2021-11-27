@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import InvalidBodyRequestException from '../exceptions/InvalidBodyRequestException';
 
 import InvalidIdException from '../exceptions/InvalidIdException';
 
@@ -23,7 +22,6 @@ class TravelsRepository {
     }
 
     const travel = await this.travelModel.findById(id).populate('days');
-
     return travel;
   }
 
@@ -40,12 +38,14 @@ class TravelsRepository {
   }
 
   async update(body, travelId) {
-    const response = await this.travelModel.findByIdAndUpdate(
-      travelId,
-      { $set: { ...body } },
-      { new: true },
-    );
-    console.log(response);
+    console.log('repository update', body);
+    const updateTravel = await this.travelModel.findByIdAndUpdate(travelId, body, { new: true });
+    return updateTravel;
+  }
+
+  async delete(travelId) {
+    const deleteTravel = await this.travelModel.findById(travelId);
+    return deleteTravel;
   }
 }
 

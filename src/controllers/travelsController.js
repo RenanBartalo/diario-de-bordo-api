@@ -20,8 +20,6 @@ router.get('/', async (req, res, next) => {
   try {
     const { title } = req.query;
 
-    console.log('REQ.USER', req.user);
-
     const allTravels = await travelsService.getAllByFilter(title, req.user.id);
     console.log(allTravels);
     const theUser = await usersService.getOne(req.user.id);
@@ -34,8 +32,6 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-
-    console.log('REQ.USER NA ROTA DE DETALHE', req.user);
 
     const travel = await travelsService.getOne(id);
 
@@ -57,14 +53,25 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:travelId', async (req, res, next) => {
   try {
     const { body } = req;
     const { travelId } = req.params;
 
     const updateTravel = await travelsService.update(body, travelId);
-    console.log('caiu aqui no update!', body);
     res.json(updateTravel);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:travelId', async (req, res, next) => {
+  try {
+    const { travelId } = req.params;
+
+    const deleteTravel = await travelsService.delete(travelId);
+    deleteTravel.remove();
+    res.json(deleteTravel);
   } catch (error) {
     next(error);
   }
