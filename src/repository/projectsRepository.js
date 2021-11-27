@@ -11,7 +11,7 @@ class ProjectsRepository {
     const projects = await this.projectModel.find({
       title: { $regex: new RegExp(title, 'i') },
       owner: userId,
-    });
+    }).populate('owner');
 
     return projects;
   }

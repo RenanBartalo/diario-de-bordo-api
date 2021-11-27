@@ -4,6 +4,12 @@ import Project from '../models/Project';
 import ProjectsService from '../service/projectsService';
 import ProjectsRepository from '../repository/projectsRepository';
 
+import User from '../models/User';
+import UsersService from '../service/userService';
+import UsersRepository from '../repository/usersRepository';
+
+const usersRepository = new UsersRepository(User);
+const usersService = new UsersService(usersRepository);
 const router = Router();
 
 // Injeção de Dependências
@@ -17,11 +23,12 @@ router.get('/', async (req, res, next) => {
   try {
     const { title } = req.query;
 
-    console.log('REQ.USER', req.user);
+    console.log('REQ.USER - ROTA PROJECTS', req.user);
 
-    const projects = await projectsService.getAllByFilter(title, req.user.id);
-
-    res.json(projects);
+    const allProjects = await projectsService.getAllByFilter(title, req.user.id);
+    const user = await usersService.getOne(req.user.id);
+    console.log(user);
+    res.json({ projects: allProjects, theuser: user });
   } catch (error) {
     next(error);
   }
