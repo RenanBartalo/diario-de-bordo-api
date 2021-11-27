@@ -22,7 +22,6 @@ class TravelsRepository {
     }
 
     const travel = await this.travelModel.findById(id).populate('days');
-
     return travel;
   }
 
@@ -33,7 +32,20 @@ class TravelsRepository {
   }
 
   async insertDayId(travelId, dayId) {
-    await this.travelModel.findByIdAndUpdate(travelId, { $push: { days: dayId } });
+    await this.travelModel.findByIdAndUpdate(travelId, {
+      $push: { days: dayId },
+    });
+  }
+
+  async update(body, travelId) {
+    console.log('repository update', body);
+    const updateTravel = await this.travelModel.findByIdAndUpdate(travelId, body, { new: true });
+    return updateTravel;
+  }
+
+  async delete(travelId) {
+    const deleteTravel = await this.travelModel.findById(travelId);
+    return deleteTravel;
   }
 }
 

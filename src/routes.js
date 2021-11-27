@@ -6,6 +6,7 @@ import tasksController from './controllers/tasksController';
 import authController from './controllers/authController';
 import travelsController from './controllers/travelsController';
 import daysController from './controllers/daysController';
+import usersController from './controllers/usersController';
 
 import NotAuthenticatedException from './exceptions/NotAuthenticatedException';
 
@@ -38,8 +39,9 @@ router.use((req, res, next) => {
 });
 
 // Rotas Privadas
-router.use('/projects', projectsController); // /api/projects
+router.use('/projects', projectsController, usersController); // /api/projects
 router.use('/tasks', tasksController); // /api/tasks
 router.use('/travels', travelsController);
 router.use('/days', daysController);
+
 export default router;

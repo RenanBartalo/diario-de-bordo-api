@@ -12,6 +12,7 @@ const travelSchema = new Schema({
   },
   dataDeVolta: {
     type: Date,
+    min: '1987-09-28',
   },
   photo: [{
     type: String,

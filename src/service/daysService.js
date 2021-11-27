@@ -6,10 +6,9 @@ import InvalidBodyRequestException from '../exceptions/InvalidBodyRequestExcepti
 import InvalidIdException from '../exceptions/InvalidIdException';
 
 class DaysService {
-  constructor(dayRepository, travelRepository) {
-    this.dayRepository = dayRepository;
-    this.travelRepository = travelRepository;
-  }
+
+  constructor(daysRepository, travelRepository) {
+    this.daysRepository = daysRepository;
 
   async getDaysByTravelId(travelId) {
     const isIdValid = mongoose.isValidObjectId(travelId);
@@ -18,14 +17,20 @@ class DaysService {
       throw new InvalidIdException();
     }
 
-    const days = await this.dayRepository.getDaysByTravelId(travelId);
+    const days = await this.daysRepository.getDaysByTravelId(travelId);
 
     return days;
   }
 
+  async getOneDay(dayId) {
+    const day = await this.daysRepository.getOneDay(dayId);
+
+    return day;
+  }
+
   async create(body, travelId) {
     const schema = yup.object().shape({
-      title: yup.string().required('Required Field').min(6, 'Minimum of 6 characters').max(50, 'Maximum of 50 characters'),
+      dia: yup.string().required('Required Field').min(1, 'Minimum of 1 characters').max(3, 'Maximum of 3 characters'),
       description: yup.string().required('Required Field').min(15, 'Minimum of 15 characters').max(150, 'Maximum of 150 characters'),
     });
 
@@ -48,11 +53,21 @@ class DaysService {
 
     const savedDay = await this.dayRepository.createNewDay({ ...body, travel: travelId });
 
-    // Aqui em baixo temos acesso ao _id da nova task
-    // Precisa pegar o projeto pelo ID e inserir dentro de tasks o ID da tarefa criada acima
     await this.travelRepository.insertDayId(travelId, savedDay._id);
 
     return savedDay;
+  }
+
+  async update(body, travelId) {
+    const updateDay = await this.daysRepository.update(body, travelId);
+
+    return updateDay;
+  }
+
+  async delete(travelId) {
+    const deleteDay = await this.daysRepository.delete(travelId);
+
+    return deleteDay;
   }
 }
 
