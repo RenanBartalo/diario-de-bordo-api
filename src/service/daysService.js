@@ -6,9 +6,9 @@ import InvalidBodyRequestException from '../exceptions/InvalidBodyRequestExcepti
 import InvalidIdException from '../exceptions/InvalidIdException';
 
 class DaysService {
-
-  constructor(daysRepository, travelRepository) {
+  constructor(daysRepository) {
     this.daysRepository = daysRepository;
+  }
 
   async getDaysByTravelId(travelId) {
     const isIdValid = mongoose.isValidObjectId(travelId);
