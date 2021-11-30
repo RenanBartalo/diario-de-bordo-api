@@ -17,8 +17,9 @@ const travelSchema = new Schema({
   photo: [{
     type: String,
   }],
-  days: [{ type: Schema.Types.ObjectId, ref: 'day', default: [] }], // One To Many
-  owner: { type: Schema.Types.ObjectId, ref: 'user', required: true }, // One To One
+  days: [{ type: Schema.Types.ObjectId, ref: 'day', default: [] }],
+  owner: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+  privacy: { type: Boolean, default: true },
 }, {
   timestamps: true,
 });

@@ -10,7 +10,8 @@ const daySchema = new Schema({
   photos: [{
     type: String,
   }],
-  travel: { type: Schema.Types.ObjectId, ref: 'travel', required: true }, // One To One
+  privacy: { type: Boolean, default: true },
+  travel: { type: Schema.Types.ObjectId, ref: 'travel', required: true },
 }, {
   timestamps: true,
 });
