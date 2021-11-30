@@ -31,8 +31,16 @@ class DaysService {
 
   async create(body, travelId) {
     const schema = yup.object().shape({
-      dia: yup.string().required('Required Field').min(1, 'Minimum of 1 characters').max(3, 'Maximum of 3 characters'),
-      description: yup.string().required('Required Field').min(15, 'Minimum of 15 characters').max(150, 'Maximum of 150 characters'),
+      dia: yup
+        .string()
+        .required('Required Field')
+        .min(1, 'Minimum of 1 characters')
+        .max(3, 'Maximum of 3 characters'),
+      description: yup
+        .string()
+        .required('Required Field')
+        .min(15, 'Minimum of 15 characters')
+        .max(150, 'Maximum of 150 characters'),
     });
 
     try {
@@ -52,7 +60,10 @@ class DaysService {
       throw new InvalidIdException();
     }
 
-    const savedDay = await this.dayRepository.createNewDay({ ...body, travel: travelId });
+    const savedDay = await this.dayRepository.createNewDay({
+      ...body,
+      travel: travelId,
+    });
 
     await this.travelRepository.insertDayId(travelId, savedDay._id);
 
