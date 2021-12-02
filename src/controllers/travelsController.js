@@ -46,7 +46,7 @@ router.post('/', async (req, res, next) => {
     const { body } = req;
 
     const newTravel = await travelsService.create(body, req.user.id);
-
+    console.log('Chamou o post');
     res.json(newTravel);
   } catch (error) {
     next(error);

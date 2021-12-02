@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const daySchema = new Schema({
   dia: {
-    type: Number,
+    type: String,
   },
   description: {
     type: String, required: true, minlength: 3, maxlength: 250,
