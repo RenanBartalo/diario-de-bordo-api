@@ -9,9 +9,9 @@ import DaysRepository from '../repository/daysRepository';
 import TravelRepository from '../repository/travelsRepository';
 
 // Injeção de Dependencias
-const daysRepository = new DaysRepository(Day);
+const dayRepository = new DaysRepository(Day);
 const travelRepository = new TravelRepository(Travel);
-const daysService = new DayService(daysRepository, travelRepository);
+const daysService = new DayService(dayRepository, travelRepository);
 
 const router = Router();
 
@@ -46,7 +46,6 @@ router.post('/:travelId', async (req, res, next) => {
     const { travelId } = req.params;
 
     const savedDay = await daysService.create(body, travelId);
-    // Podemos movê-lo para o projectepository
 
     res.status(201).json(savedDay);
   } catch (error) {

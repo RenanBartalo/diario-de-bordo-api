@@ -6,8 +6,9 @@ import InvalidBodyRequestException from '../exceptions/InvalidBodyRequestExcepti
 import InvalidIdException from '../exceptions/InvalidIdException';
 
 class DaysService {
-  constructor(daysRepository) {
-    this.daysRepository = daysRepository;
+  constructor(dayRepository, travelRepository) {
+    this.dayRepository = dayRepository;
+    this.travelRepository = travelRepository;
   }
 
   async getDaysByTravelId(travelId) {
@@ -17,29 +18,21 @@ class DaysService {
       throw new InvalidIdException();
     }
 
-    const days = await this.daysRepository.getDaysByTravelId(travelId);
+    const days = await this.dayRepository.getDaysByTravelId(travelId);
 
     return days;
   }
 
   async getOneDay(dayId) {
-    const day = await this.daysRepository.getOneDay(dayId);
+    const day = await this.dayRepository.getOneDay(dayId);
 
     return day;
   }
 
   async create(body, travelId) {
     const schema = yup.object().shape({
-      dia: yup
-        .string()
-        .required('Required Field')
-        .min(1, 'Minimum of 1 characters')
-        .max(3, 'Maximum of 3 characters'),
-      description: yup
-        .string()
-        .required('Required Field')
-        .min(15, 'Minimum of 15 characters')
-        .max(150, 'Maximum of 150 characters'),
+      dia: yup.string().required('Required Field').min(1, 'Minimum of 6 characters').max(3, 'Maximum of 50 characters'),
+      description: yup.string().required('Required Field').min(15, 'Minimum of 15 characters').max(150, 'Maximum of 150 characters'),
     });
 
     try {
@@ -59,11 +52,7 @@ class DaysService {
       throw new InvalidIdException();
     }
 
-    const savedDay = await this.dayRepository.createNewDay({
-      ...body,
-      travel: travelId,
-    });
-
+    const savedDay = await this.dayRepository.createNewDay({ ...body, travel: travelId });
     await this.travelRepository.insertDayId(travelId, savedDay._id);
 
     return savedDay;
