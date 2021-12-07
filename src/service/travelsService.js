@@ -12,6 +12,12 @@ class TravelsService {
     return travels;
   }
 
+  async getAllToSocial() {
+    const travels = await this.travelsRepository.getAllSocial();
+
+    return travels;
+  }
+
   async getOne(id) {
     // CONTRATO: PRECISO DE UM METODO QUE RECEBA UM ID E RETORNE UM PROJETO
     const travel = await this.travelsRepository.getOne(id);

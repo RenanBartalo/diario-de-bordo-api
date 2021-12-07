@@ -11,7 +11,6 @@ class DaysRepository {
 
   async getOneDay(dayId) {
     const day = await this.dayModel.findById(dayId);
-    console.log(day);
     return day;
   }
 
@@ -22,7 +21,6 @@ class DaysRepository {
   }
 
   async update(body, travelId) {
-    console.log('repository update', body);
     const updateDay = await this.dayModel.findByIdAndUpdate(travelId, body, { new: true });
     return updateDay;
   }

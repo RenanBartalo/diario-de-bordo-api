@@ -9,6 +9,7 @@ const userSchema = new Schema({
   role: { type: String, default: 'user', enum: ['user', 'admin'] },
   active: { type: Boolean, default: true },
   projects: [{ type: Schema.Types.ObjectId, ref: 'project', default: [] }],
+  photo: { type: String },
 }, {
   timestamps: true,
 });

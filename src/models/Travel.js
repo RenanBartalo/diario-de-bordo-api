@@ -8,15 +8,17 @@ const travelSchema = new Schema({
     type: String, minlength: 3, maxlength: 30,
   },
   dataDeIda: {
-    type: Date,
+    type: String,
   },
   dataDeVolta: {
-    type: Date,
-    min: '1987-09-28',
-  },
-  photo: [{
     type: String,
-  }],
+  },
+  photo: {
+    type: String,
+  },
+  numDays: {
+    type: Number,
+  },
   days: [{ type: Schema.Types.ObjectId, ref: 'day', default: [] }],
   owner: { type: Schema.Types.ObjectId, ref: 'user', required: true },
   privacy: { type: Boolean, default: true },

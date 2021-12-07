@@ -21,9 +21,18 @@ router.get('/', async (req, res, next) => {
     const { title } = req.query;
 
     const allTravels = await travelsService.getAllByFilter(title, req.user.id);
-    console.log(allTravels);
+
     const theUser = await usersService.getOne(req.user.id);
     res.json({ travels: allTravels, user: theUser });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/social', async (req, res, next) => {
+  try {
+    const allTravels = await travelsService.getAllToSocial();
+    res.json(allTravels);
   } catch (error) {
     next(error);
   }
@@ -44,9 +53,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { body } = req;
-
+    console.log(body);
     const newTravel = await travelsService.create(body, req.user.id);
-    console.log('Chamou o post');
     res.json(newTravel);
   } catch (error) {
     next(error);
