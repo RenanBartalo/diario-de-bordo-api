@@ -16,6 +16,14 @@ class TravelsRepository {
     return travels;
   }
 
+  async getAllSocial() {
+    const travels = await this.travelModel.find({
+      title: { $regex: new RegExp('i') },
+    }).populate('owner');
+
+    return travels.filter((travel) => travel.privacy === true);
+  }
+
   async getOne(id) {
     if (!mongoose.isValidObjectId(id)) {
       throw new InvalidIdException();
@@ -38,7 +46,6 @@ class TravelsRepository {
   }
 
   async update(body, travelId) {
-    console.log('repository update', body);
     const updateTravel = await this.travelModel.findByIdAndUpdate(travelId, body, { new: true });
     return updateTravel;
   }

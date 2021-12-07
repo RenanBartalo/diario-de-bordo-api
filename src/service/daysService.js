@@ -59,13 +59,13 @@ class DaysService {
   }
 
   async update(body, travelId) {
-    const updateDay = await this.daysRepository.update(body, travelId);
+    const updateDay = await this.dayRepository.update(body, travelId);
 
     return updateDay;
   }
 
   async delete(travelId) {
-    const deleteDay = await this.daysRepository.delete(travelId);
+    const deleteDay = await this.dayRepository.delete(travelId);
 
     return deleteDay;
   }

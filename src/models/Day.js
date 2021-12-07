@@ -5,7 +5,7 @@ const daySchema = new Schema({
     type: String,
   },
   description: {
-    type: String, required: true, minlength: 3, maxlength: 250,
+    type: String,
   },
   photos: [{
     type: String,

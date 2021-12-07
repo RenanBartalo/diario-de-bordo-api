@@ -20,7 +20,6 @@ router.get('/:travelId', async (req, res, next) => {
     const { travelId } = req.params;
 
     const days = await daysService.getDaysByTravelId(travelId);
-    console.log(days);
     res.json(days);
   } catch (error) {
     next(error);
@@ -33,7 +32,6 @@ router.get('/detail/:dayId', async (req, res, next) => {
     const { dayId } = req.params;
 
     const day = await daysService.getOneDay(dayId);
-    console.log(day);
     res.json(day);
   } catch (error) {
     next(error);
