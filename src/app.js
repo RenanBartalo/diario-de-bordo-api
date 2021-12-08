@@ -10,19 +10,19 @@ dotenv.config();
 
 initDbConnection();
 
-app.use(express.json());
-app.use(cors()); // Liberando acesso SOMENTE para o localhost:3000!!!
+app.use(express.json({ limit: '10mb', extended: true }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log(req.method, ' ', req.path);
 
-  next(); // Deixe o request prosseguir para o próximo middleware
+  next();
 });
 
 app.use('/api', appRoutes);
 
 app.use((error, req, res, next) => {
-  // Middleware UNICAMENTE responsável por receber requisições que possuam algum erro
   console.log(error);
   res.status(error.status || 500).json({ error: error.message });
 });
