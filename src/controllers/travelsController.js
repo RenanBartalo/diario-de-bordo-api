@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
     const { title } = req.query;
 
     const allTravels = await travelsService.getAllByFilter(title, req.user.id);
-
+    console.log('get all filter rolando');
     const theUser = await usersService.getOne(req.user.id);
     res.json({ travels: allTravels, user: theUser });
   } catch (error) {
@@ -32,6 +32,7 @@ router.get('/', async (req, res, next) => {
 router.get('/social', async (req, res, next) => {
   try {
     const allTravels = await travelsService.getAllToSocial();
+    console.log('social rolando');
     res.json(allTravels);
   } catch (error) {
     next(error);
