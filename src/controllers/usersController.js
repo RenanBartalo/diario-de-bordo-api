@@ -9,7 +9,7 @@ const router = Router();
 const usersRepository = new UsersRepository(User);
 const usersService = new UsersService(usersRepository);
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
     console.log('REQ.USER - ROTA USER', req.user);
     console.log('rota user rolando');
