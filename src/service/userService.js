@@ -6,8 +6,8 @@ class UsersService {
     this.usersRepository = repository;
   }
 
-  async getOne(id) {
-    const user = await this.usersRepository.getUserById(id);
+  async getOne(userId) {
+    const user = await this.usersRepository.getUserById(userId);
 
     return user;
   }
