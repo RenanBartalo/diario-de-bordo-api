@@ -11,6 +11,12 @@ class UsersService {
 
     return user;
   }
+
+  async update(body, userId) {
+    const updateUser = await this.usersRepository.update(body, userId);
+
+    return updateUser;
+  }
 }
 
 export default UsersService;

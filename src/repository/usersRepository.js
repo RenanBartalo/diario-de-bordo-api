@@ -8,6 +8,11 @@ class UsersRepository {
 
     return users;
   }
+
+  async update(body, userId) {
+    const updateUser = await this.userModel.findByIdAndUpdate(userId, body, { new: true });
+    return updateUser;
+  }
 }
 
 export default UsersRepository;
