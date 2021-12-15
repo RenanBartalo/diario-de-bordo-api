@@ -9,13 +9,25 @@ const router = Router();
 const usersRepository = new UsersRepository(User);
 const usersService = new UsersService(usersRepository);
 
-router.get('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     console.log('REQ.USER - ROTA USER', req.user);
-
+    console.log('rota user rolando');
     const user = await usersService.getOne(req.user.id);
 
     res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const { body } = req;
+    const { userId } = req.params;
+
+    const updateUser = await usersService.update(body, userId);
+    res.json(updateUser);
   } catch (error) {
     next(error);
   }

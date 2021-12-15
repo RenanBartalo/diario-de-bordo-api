@@ -28,10 +28,10 @@ router.get('/:travelId', async (req, res, next) => {
 
 router.get('/detail/:dayId', async (req, res, next) => {
   try {
-    console.log(req.params);
     const { dayId } = req.params;
-
+    console.log('tá chamando o get day!!');
     const day = await daysService.getOneDay(dayId);
+    console.log(day);
     res.json(day);
   } catch (error) {
     next(error);

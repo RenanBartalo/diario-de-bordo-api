@@ -8,7 +8,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   role: { type: String, default: 'user', enum: ['user', 'admin'] },
   active: { type: Boolean, default: true },
-  projects: [{ type: Schema.Types.ObjectId, ref: 'project', default: [] }],
+  travels: [{ type: Schema.Types.ObjectId, ref: 'travel', default: [] }],
   photo: { type: String },
 }, {
   timestamps: true,
