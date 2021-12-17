@@ -8,7 +8,6 @@ import Day from '../models/Day';
 import DaysRepository from '../repository/daysRepository';
 import TravelRepository from '../repository/travelsRepository';
 
-// Injeção de Dependencias
 const dayRepository = new DaysRepository(Day);
 const travelRepository = new TravelRepository(Travel);
 const daysService = new DayService(dayRepository, travelRepository);

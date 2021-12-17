@@ -58,8 +58,8 @@ class DaysService {
     return savedDay;
   }
 
-  async update(body, travelId) {
-    const updateDay = await this.dayRepository.update(body, travelId);
+  async update(body, dayId) {
+    const updateDay = await this.dayRepository.update(body, dayId);
 
     return updateDay;
   }

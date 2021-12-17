@@ -20,8 +20,8 @@ class DaysRepository {
     return savedDay;
   }
 
-  async update(body, travelId) {
-    const updateDay = await this.dayModel.findByIdAndUpdate(travelId, body, { new: true });
+  async update(body, dayId) {
+    const updateDay = await this.dayModel.findByIdAndUpdate(dayId, body, { new: true });
     return updateDay;
   }
 
